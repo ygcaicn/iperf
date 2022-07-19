@@ -182,6 +182,9 @@ iperf_udp_recv(struct iperf_stream *sp)
 	 * time.
 	 */
 	iperf_time_now(&arrival_time);
+    if (sp->test->verbose){
+        iperf_printf(sp->test, "%c - seq %d, len %d, send_ts %" PRIu64 ", recv_ts %" PRIu64 "\n", sp->test->role, pcount, r, iperf_time_in_usecs(&sent_time), iperf_time_in_usecs(&arrival_time));
+    }
 
 	iperf_time_diff(&arrival_time, &sent_time, &temp_time);
 	transit = iperf_time_in_secs(&temp_time);
